@@ -20,7 +20,7 @@ struct book
 {
     char number[30];
     char author[30];
-    char title[30];
+    char title[50];
     char year[10];
     char publisher[30];
 };
@@ -30,20 +30,28 @@ struct book number, author, title, year, publisher;
 int search(struct book* cat, int len, char* id);
 void printBook(struct book item);
 
-//declaring variables
-//struct book catalog[200] = {1234567, "LUSTIG", "LACH-STORY", 1986, "TROCKEN"};
-
 //main program
 int main()
 {
+
     struct book catalog[200] = {{"1234567", "LUSTIG", "LACH-STORY", "1986", "TROCKEN"},
                                 {"8745343", "KARL", "ABENTEUER", "1981", "VERITAS"},
                                 {"7654321", "MUTIG", "KRIMI-ROMANZE", "1989", "SPANNEND"},
-                                {"4078222", "HUNTER", "Die letzten Geheimnisse", "2017", "BELTZ&GELBERG"}};
-
-    int results;
-    results = search(catalog, 200, "K");
-    printf("* Search results: %d", results);
+                                {"978-3-407-82222-2", "HUNTER", "Warrior Cats: Die letzten Geheimnisse", "2017", "BELTZ&GELBERG"},
+                                {"978-3-407-82366-3", "HUNTER", "Warrior Cats: Feuer und Eis", "2008", "BELTZ&GELBERG"},
+                                {"978-3-902894-03-8", "KNOLL", "100 Jahre Traunseebahn", "2012", "Railway-Media-Group"},
+                                {"87909870", "WEGENSTEIN", "Die Stubaitalbahn", "1981", "POSPISCHIL"},
+                                {"978-3-7855-7361-7", "POZNANSKI", "Erebos", "2010", "LOEWE"},
+                                {"978-3-7855-8231-2", "POZNANSKI", "Elanus", "2016", "LOEWE"},
+                                {"3-473-34448-6", "LEMANCZYK", "Das verlorene Land", "2005", "Ravensburger"},
+                                {"978-3-570-30961-2", "DASHNER", "Elanus", "2015", "cbt"},
+                                {"978-3-442-24492-8", "HICKMAN", "Der Quell der Finsternis", "2007", "blanvalet"},
+                                {"978-0-099-57286-2", "BOYNE", "The boy in the striped pyjamas", "2006", "vintage"}};
+    char letter[3];
+    printf("* Please type in the first letter of the author of the book you are searching for\n");
+    fflush(stdin);
+    scanf("%s", &letter);
+    printf("* Search results: %d", search(catalog, 200, letter));
 }
 
 //********************************************************************
@@ -92,4 +100,5 @@ void printBook(struct book item)
     printf("* Title: %s\n", item.title);
     printf("* Year: %s\n", item.year);
     printf("* Publisher: %s\n", item.publisher);
+    printf("* _________________________\n");
 }
