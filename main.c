@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 //********************************************************************
 //
 // Program        : Übung 21 - Buchverwaltung
@@ -22,14 +21,14 @@ struct book
     char number[30];
     char author[30];
     char title[30];
-    char year[4];
+    char year[10];
     char publisher[30];
 };
 struct book number, author, title, year, publisher;
 
 //defining functions
 int search(struct book* cat, int len, char* id);
-void printBook(struct book* item);
+void printBook(struct book item);
 
 //declaring variables
 //struct book catalog[200] = {1234567, "LUSTIG", "LACH-STORY", 1986, "TROCKEN"};
@@ -42,7 +41,9 @@ int main()
                                 {"7654321", "MUTIG", "KRIMI-ROMANZE", "1989", "SPANNEND"},
                                 {"4078222", "HUNTER", "Die letzten Geheimnisse", "2017", "BELTZ&GELBERG"}};
 
-    printf("* Search results: %d", search(catalog, 200, "M"));
+    int results;
+    results = search(catalog, 200, "K");
+    printf("* Search results: %d", results);
 }
 
 //********************************************************************
@@ -60,12 +61,16 @@ int main()
 //********************************************************************
 int search(struct book* cat, int len, char* id)
 {
+    int count = 0;
     for (int i = 0; i < len; ++i)
     {
-        if(cat[i].author[0] == id)
-            return i + 1;
+        if(cat[i].author[0] == *id)
+        {
+            printBook(cat[i]);
+            ++count;
+        }
     }
-    return 0;
+    return count;
 }
 
 //********************************************************************
@@ -79,12 +84,12 @@ int search(struct book* cat, int len, char* id)
 //    1   item  struct book*    The book, whose values should be printed
 //
 //********************************************************************
-void printBook(struct book* item)
+void printBook(struct book item)
 {
     printf("* ---- Book ----\n");
-    printf("* Book number: %s\n", item->number);
-    printf("* Author: %s\n", item->author);
-    printf("* Title: %s\n", item->title);
-    printf("* Year: %s\n",item->year);
-    printf("* Publisher: %s\n", item->publisher);
+    printf("* Book number: %s\n", item.number);
+    printf("* Author: %s\n", item.author);
+    printf("* Title: %s\n", item.title);
+    printf("* Year: %s\n", item.year);
+    printf("* Publisher: %s\n", item.publisher);
 }
